@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+       <!-- Site Icons -->
+       <link rel="shortcut icon" href="logo.jpg" type="image/x-icon" />
+       <link rel="apple-touch-icon" href="logo.jpg">
+<head>
+  <meta charset="UTF-8">
+  <title>Protozoa question</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+
+    #question-container {
+      text-align: center;
+      margin-top: 50px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border: 2px solid #000; /* Added black border */
+      max-width: 600px; /* Adjusted maximum width */
+      margin: 0 auto; /* Center the box horizontally */
+    }
+
+    #question {
+      font-size: 28px; /* Increased font size of the question */
+      margin-bottom: 20px;
+    }
+
+    #question-number {
+      font-size: 16px;
+      margin-bottom: 10px;
+      color: #666;
+    }
+
+    #options-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .option {
+      margin: 10px 0;
+      padding: 12px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border: 1px solid #000; /* Added border around the options */
+      width: 300px;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+
+    .option:hover {
+      background-color: #f0f0f0;
+      transform: translateY(-3px);
+    }
+
+    .correct {
+      color: #008000;
+      font-weight: bold;
+    }
+
+    .wrong {
+      color: #ff0000;
+      font-weight: bold;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+
+    #next-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4caf50;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #next-btn:hover {
+      background-color: #45a049;
+    }
+
+    @media (max-width: 500px) {
+      .option {
+        width: 80%;
+      }
+    }
+  </style>
+</head>
+<body>
+    <div id="question-container">
+      <p id="question-number"></p>
+      <h2 id="question"></h2>
+      <div id="options-container"></div>
+      <p id="result"></p>
+      <button id="next-btn" style="display: none;">Next</button>
+      <button id="back-btn" style="display: none;">Back to Question Bank</button>
+    </div>
+    
+    <script>
+      const questions = [
+      
+        {
+          question: ' Unicellular eukaryotic microorganism compries:',
+          options: ['Fungi', 'Plants', 'Protista', 'none'],
+          answer: 'Protista'
+        }, 
+       
+        {
+          question: 'A protist dose not move with the help of ',
+          options: ['Cillia', 'Parapodia', 'flagella', 'pseudopodia'],
+          answer: 'Parapodia'
+        }, 
+        {
+          question: 'Phylum protista is classified on the basis of',
+          options: ['Reproduction', 'Habitat', 'Locomotion', 'Organization'],
+          answer: 'Reproduction'
+        }, 
+       
+        {
+          question: 'Which of the following is not unicelluar eukaryotes:',
+          options: ['Diatoms', 'Euglena', 'Dinoflagellates', 'None'],
+          answer: 'Dinoflagellates'
+        }, 
+         {
+          question: 'Example of bioluminescent protozoan:',
+          options: ['Paramecium', 'Pyorrhea', 'Opalina', 'Noctiluca'],
+          answer: 'Noctiluca'
+        }, 
+       
+        {
+          question: 'Creatium is a ',
+          options: ['Dinoflagellate', 'Diatoms', 'Slime moulds', 'Notes'],
+          answer: 'Dinoflagellate'
+        }, 
+         {
+          question: 'Red tide is caused by ',
+          options: ['Dinoflagellate', 'Diatoms', 'Slime moulds', 'None'],
+          answer: 'Dinoflagellate'
+        }, 
+       
+        {
+          question: 'Dinoflagellate have how many flagella?',
+          options: ['1', '2', '3', '1 or 2'],
+          answer: '2'
+        }, 
+         {
+          question: 'Which is mixotrophic ? ',
+          options: ['Euglena', 'Animal', 'Diatoms', 'Slimes'],
+          answer: 'Euglena'
+        }, 
+       
+        {
+          question: 'Euglena are also Classified as plant because ',
+          options: ['Chloroplast', 'Rigid cell wall', 'One or more flagella', 'No locomotion'],
+          answer: 'Chloroplast'
+        },  {
+          question: 'The cyst of euglena is made up of ',
+          options: ['Lipids', 'Protiens', 'Histones', 'Carbohydrate'],
+          answer: 'Carbohydrate'
+        }, 
+       
+        {
+          question: 'Which is called photosynthesis protest?',
+          options: ['Euglena', 'Physarum', 'Tetrahymena', 'None'],
+          answer: 'Euglena'
+        },  {
+          question: 'Which is the connecting link plants & Animlas',
+          options: ['Euglena', 'Dinoflagellate', 'Mycobacteria', 'None'],
+          answer: 'Euglena'
+        }, 
+       
+        {
+          question: 'Reserved food afor euglena is ',
+          options: ['Paramylon', 'Fats', 'Starch', 'Both "b" & "c"'],
+          answer: 'Paramylon'
+        },  {
+          question: 'Which protozoans is unlikely to have no contractile vacoule ?',
+          options: ['Euglena', 'Paramecium', 'Amoeba', 'Plasmodium'],
+          answer: 'Plasmodium'
+        }, 
+       
+        {
+          question: 'Nitrogenous waste of protozoans is :',
+          options: ['NH3', 'N2', 'Urea', 'Uric acid'],
+          answer: 'NH3'
+        },  {
+          question: 'Which of the following is photosynthetic? ',
+          options: ['Monocystis', 'Paramecium', 'Euglena', 'Leishmania'],
+          answer: 'Euglena'
+        }, 
+       
+        {
+          question: 'Which class include all parastic forms:',
+          options: ['Mastigophora', 'Sporozoa', 'Cilliata', 'Sarcodina'],
+          answer: 'Sporozoa'
+        },  {
+          question: 'Suctoria belongs to:',
+          options: ['Protozoa', 'Porifera', 'Annelida', 'None'],
+          answer: 'Protozoa'
+        }, 
+       
+        {
+          question: 'Amoeba exhibits no',
+          options: ['Locomotion', 'Skeleton', 'Digestion', 'Reproduction'],
+          answer: 'Skeleton'
+        },  {
+          question: 'Osmo requlation in amoeba is done by:',
+          options: ['Contractile vacoule', 'Plasma gel', 'Food vacoule', 'Plasma lemma'],
+          answer: 'Contractile vacoule'
+        }, 
+       
+        {
+          question: 'The posterior part of amoeba contains:',
+          options: ['Pseudopodium', 'Bullet', 'CV (contractile vacoule)', 'All of these'],
+          answer: 'CV (contractile vacoule)'
+        },  {
+          question: 'During unfavourable condition, Amoeba reproduce through:',
+          options: ['Binary fission', 'Multiple fission', 'Budding', 'Conjugation'],
+          answer: 'Multiple fission'
+        }, 
+       
+        {
+          question: 'RBCs are seen in the food vacoule of ?',
+          options: ['Entamoeba', 'Trypanosome', 'Plamodium', 'Giardia'],
+          answer: 'Entamoeba'
+        },  {
+          question: 'How many nuclei are found in mature cyst of entamoeba CoH?',
+          options: ['1', '8', '3', '4'],
+          answer: '8'
+        }, 
+       
+        {
+          question: 'Entamoeba histolyica infection occurs through?',
+          options: ['Virus', 'Sexual', 'Mosquito', 'Contaminated food'],
+          answer: 'Contaminated food'
+        },  {
+          question: 'Chromatid bodies in entamoeba are found in ',
+          options: ['Cyst', 'Metacyst', 'Trophozoite', 'Minuta'],
+          answer: 'Cyst'
+        }, 
+       
+        {
+          question: 'Entamoeba coli is a ',
+          options: ['Symbiont', 'Commensal ', 'Predator', 'Pathogenic'],
+          answer: 'Commensal'
+        },  {
+          question: 'Internal skeleton is the feature found in ...............protozoans',
+          options: ['Radiolarins', 'Hymena', 'Trypanosoma', 'Pyronsoma'],
+          answer: 'Radiolarins'
+        }, 
+       
+        {
+          question: 'Which is polymorphic?',
+          options: ['Leishmania', 'Trypanosome', 'E.histolytica', 'Amoeba'],
+          answer: 'Trypanosome'
+        },  {
+          question: 'Leishmania has:',
+          options: ['Phlebotomus as vector', 'Phlebotomus as pathogen', 'Phlebotomus as courier', 'Sandfly as asexual transmission'],
+          answer: 'Phlebotomus as vector'
+        }, 
+       
+        {
+          question: 'Which is only bilateral symmetry?',
+          options: ['Gidaria', 'Trypananosome', 'Leishmania', 'None'],
+          answer: 'Gidaria'
+        }, 
+        {
+          question: 'Which one is a holophytic protozoa?',
+          options: ['EUglena', 'Monocytis', 'Amoeba', 'Giardia'],
+          answer: 'EUglena'
+        }, 
+        {
+          question: 'WHich one is not free living protozoa?',
+          options: ['Amoeba', 'Gidaria', 'EUglena', 'Noctiluca'],
+          answer: 'Gidaria'
+        }, 
+        {
+          question: 'Which one is not a free living protozoa?',
+          options: ['Amoeba', 'Giardia', 'Euglena', 'Noctiluca'],
+          answer: 'Giardia'
+        }, 
+        {
+          question: 'WHich one is Monogenetic?',
+          options: ['Hookworm', 'GIardia', 'Entamoeba hystolytica', 'All'],
+          answer: 'All'
+        }, 
+        
+            
+      ];
+  
+      let currentQuestion = 0;
+
+const questionEl = document.getElementById('question');
+const questionNumberEl = document.getElementById('question-number');
+const optionsContainerEl = document.getElementById('options-container');
+const resultEl = document.getElementById('result');
+const nextBtn = document.getElementById('next-btn');
+const backBtn = document.getElementById('back-btn');
+
+function shuffleOptions(options) {
+  for (let i = options.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [options[i], options[j]] = [options[j], options[i]];
+  }
+  return options;
+}
+
+function shuffleQuestions() {
+  for (let i = questions.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [questions[i], questions[j]] = [questions[j], questions[i]];
+  }
+}
+
+function displayQuestion() {
+  const current = questions[currentQuestion];
+  questionEl.textContent = current.question;
+  questionNumberEl.textContent = `Question ${currentQuestion + 1}/${questions.length}`;
+
+  optionsContainerEl.innerHTML = '';
+  const shuffledOptions = shuffleOptions([...current.options]);
+  shuffledOptions.forEach((option) => {
+    const optionEl = document.createElement('div');
+    optionEl.textContent = option;
+    optionEl.classList.add('option');
+    optionEl.addEventListener('click', () => checkAnswer(option));
+    optionsContainerEl.appendChild(optionEl);
+  });
+
+  resultEl.textContent = '';
+  nextBtn.style.display = 'none';
+}
+
+function checkAnswer(selectedOption) {
+  const current = questions[currentQuestion];
+  const correctAnswer = current.answer;
+
+  const options = optionsContainerEl.getElementsByClassName('option');
+  for (let i = 0; i < options.length; i++) {
+    if (options[i].textContent === selectedOption) {
+      if (selectedOption === correctAnswer) {
+        options[i].classList.add('correct');
+      } else {
+        options[i].classList.add('wrong');
+      }
+    }
+    if (options[i].textContent === correctAnswer) {
+      options[i].classList.add('correct');
+    }
+  }
+
+  if (selectedOption === correctAnswer) {
+    resultEl.textContent = 'Correct answer!';
+    resultEl.classList.add('correct');
+  } else {
+    resultEl.textContent = 'Wrong answer. Correct answer is: ' + correctAnswer;
+    resultEl.classList.add('wrong');
+  }
+
+  nextBtn.style.display = 'block';
+}
+
+nextBtn.addEventListener('click', () => {
+  resultEl.textContent = '';
+  resultEl.classList.remove('correct', 'wrong');
+
+  const options = optionsContainerEl.getElementsByClassName('option');
+  for (let i = 0; i < options.length; i++) {
+    options[i].classList.remove('correct', 'wrong');
+  }
+
+  currentQuestion++;
+  if (currentQuestion < questions.length) {
+    displayQuestion();
+  } else {
+    questionEl.textContent = 'Quiz completed!';
+    optionsContainerEl.innerHTML = '';
+    nextBtn.style.display = 'none';
+    backBtn.style.display = 'block';
+  }
+});
+
+backBtn.addEventListener('click', () => {
+  window.location.href = 'questionbank.html'; // Redirect to questionbank.html
+});
+
+shuffleQuestions();
+displayQuestion();
+</script>
+</body>
+</html>
